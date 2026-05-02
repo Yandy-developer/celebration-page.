@@ -1,0 +1,1548 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>¡Feliz Cumpleaños, Sofía! 🎂</title>
+  <meta name="description" content="Una celebración especial creada con amor para Sofía. ¡Feliz cumpleaños!" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&family=Dancing+Script:wght@400;600;700&display=swap"
+    rel="stylesheet" />
+
+  <style>
+    /* ── DESIGN TOKENS ── */
+    :root {
+      --gold: #f5c842;
+      --gold-light: #ffe280;
+      --rose: #ff6b9d;
+      --rose-dark: #e0436e;
+      --violet: #a855f7;
+      --violet-dark: #7c3aed;
+      --bg-deep: #0a0612;
+      --bg-card: rgba(255, 255, 255, 0.04);
+      --border: rgba(255, 255, 255, 0.08);
+      --text: #fff;
+      --text-muted: rgba(255, 255, 255, 0.55);
+      --text-dim: rgba(255, 255, 255, 0.28);
+      --radius-sm: 12px;
+      --radius-md: 16px;
+      --radius-lg: 24px;
+      --radius-full: 999px;
+      --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+      --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* ── RESET ── */
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg-deep);
+      color: var(--text);
+      overflow-x: hidden;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── CANVAS LAYERS ── */
+    #particles-canvas,
+    #confetti-canvas {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+    }
+
+    #particles-canvas {
+      z-index: 0;
+    }
+
+    #confetti-canvas {
+      z-index: 1;
+    }
+
+    .content {
+      position: relative;
+      z-index: 2;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      text-align: center;
+      position: relative;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% 0%, rgba(168, 85, 247, .25) 0%, transparent 70%),
+        radial-gradient(ellipse 60% 40% at 20% 80%, rgba(255, 107, 157, .18) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 50% at 80% 60%, rgba(245, 200, 66, .12) 0%, transparent 60%);
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      padding: .4rem 1.1rem;
+      border: 1px solid rgba(245, 200, 66, .35);
+      border-radius: var(--radius-full);
+      background: rgba(245, 200, 66, .08);
+      font-size: .78rem;
+      font-weight: 500;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--gold-light);
+      margin-bottom: 2rem;
+      animation: fadeDown .8s ease both;
+    }
+
+    .hero-eyebrow {
+      font-family: 'Dancing Script', cursive;
+      font-size: clamp(1.4rem, 4vw, 2rem);
+      color: var(--rose);
+      margin-bottom: .5rem;
+      animation: fadeDown .8s .2s ease both;
+    }
+
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: clamp(3.5rem, 12vw, 8rem);
+      line-height: 1;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, #fff 0%, var(--gold-light) 40%, var(--rose) 80%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      filter: drop-shadow(0 0 40px rgba(245, 200, 66, .3));
+      animation: fadeDown .9s .35s ease both;
+    }
+
+    .hero-name {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 8vw, 5rem);
+      font-style: italic;
+      color: var(--gold-light);
+      text-shadow: 0 0 60px rgba(245, 200, 66, .5);
+      animation: fadeDown .9s .5s ease both;
+    }
+
+    .hero-subtitle {
+      margin-top: 1.5rem;
+      font-size: clamp(.95rem, 2.5vw, 1.15rem);
+      color: var(--text-muted);
+      max-width: 480px;
+      line-height: 1.7;
+      animation: fadeDown .9s .65s ease both;
+    }
+
+    .age-ring {
+      margin: 2.5rem auto 0;
+      width: 130px;
+      height: 130px;
+      border-radius: 50%;
+      border: 3px solid transparent;
+      cursor: pointer;
+      background: linear-gradient(var(--bg-deep), var(--bg-deep)) padding-box,
+        linear-gradient(135deg, var(--gold), var(--rose), var(--violet)) border-box;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 40px rgba(245, 200, 66, .15), inset 0 0 30px rgba(168, 85, 247, .08);
+      animation: popIn .7s .9s var(--ease-spring) both;
+      transition: transform .25s ease, box-shadow .25s ease;
+    }
+
+    .age-ring:hover {
+      transform: scale(1.06);
+      box-shadow: 0 0 60px rgba(245, 200, 66, .3);
+    }
+
+    .age-number {
+      font-family: 'Playfair Display', serif;
+      font-size: 3.5rem;
+      font-weight: 700;
+      line-height: 1;
+      background: linear-gradient(135deg, var(--gold), var(--rose));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .age-label {
+      font-size: .7rem;
+      text-transform: uppercase;
+      letter-spacing: .15em;
+      color: var(--text-muted);
+      margin-top: .2rem;
+    }
+
+    .scroll-cta {
+      margin-top: 3.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: .6rem;
+      animation: fadeIn 1s 1.3s ease both;
+    }
+
+    .scroll-cta span {
+      font-size: .78rem;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      color: var(--text-muted);
+    }
+
+    .scroll-arrow {
+      width: 24px;
+      height: 24px;
+      border-right: 2px solid var(--rose);
+      border-bottom: 2px solid var(--rose);
+      transform: rotate(45deg);
+      animation: bounce 1.5s infinite;
+    }
+
+    /* ── SECTIONS ── */
+    section {
+      padding: 5rem 1.5rem;
+    }
+
+    .section-inner {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .divider {
+      height: 1px;
+      max-width: 600px;
+      margin: 0 auto;
+      background: linear-gradient(to right, transparent, var(--border), transparent);
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 4vw, 2.5rem);
+      text-align: center;
+      margin-bottom: .75rem;
+      background: linear-gradient(135deg, #fff, var(--gold-light));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .section-sub {
+      text-align: center;
+      color: var(--text-muted);
+      font-size: .95rem;
+      margin-bottom: 3rem;
+    }
+
+    /* ── MESSAGE ── */
+    .message-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 3rem;
+      backdrop-filter: blur(20px);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .message-card::before {
+      content: '"';
+      font-family: 'Playfair Display', serif;
+      font-size: 14rem;
+      color: rgba(245, 200, 66, .06);
+      position: absolute;
+      top: -3rem;
+      left: 1rem;
+      line-height: 1;
+      pointer-events: none;
+    }
+
+    .message-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 200px;
+      height: 200px;
+      background: radial-gradient(circle, rgba(168, 85, 247, .12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .message-label {
+      font-size: .75rem;
+      text-transform: uppercase;
+      letter-spacing: .18em;
+      color: var(--rose);
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+    }
+
+    .message-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(to right, rgba(255, 107, 157, .4), transparent);
+    }
+
+    .message-text {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+      line-height: 1.85;
+      color: rgba(255, 255, 255, .88);
+      font-style: italic;
+      position: relative;
+      z-index: 1;
+    }
+
+    .message-from {
+      margin-top: 2rem;
+      text-align: right;
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.4rem;
+      color: var(--gold-light);
+    }
+
+    /* ── GALLERY ── */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+
+    .gallery-item {
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      aspect-ratio: 1;
+      position: relative;
+      cursor: pointer;
+      transition: transform .3s ease, box-shadow .3s ease;
+    }
+
+    .gallery-item:hover {
+      transform: scale(1.04);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, .5);
+      z-index: 5;
+    }
+
+    .gallery-item:first-child {
+      grid-column: span 2;
+      grid-row: span 2;
+      aspect-ratio: auto;
+    }
+
+    .gallery-placeholder {
+      width: 100%;
+      height: 100%;
+      min-height: 200px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: .5rem;
+      font-size: 2.5rem;
+      color: rgba(255, 255, 255, .15);
+      border: 1px dashed rgba(255, 255, 255, .1);
+      border-radius: var(--radius-md);
+      background: rgba(255, 255, 255, .02);
+      transition: all .3s ease;
+    }
+
+    .gallery-item:first-child .gallery-placeholder {
+      min-height: 360px;
+      font-size: 4rem;
+    }
+
+    .gallery-placeholder span {
+      font-size: .8rem;
+      font-weight: 400;
+      letter-spacing: .05em;
+      color: rgba(255, 255, 255, .2);
+    }
+
+    /* ── COUNTDOWN ── */
+    .countdown-section {
+      text-align: center;
+    }
+
+    .countdown-label {
+      font-size: .78rem;
+      text-transform: uppercase;
+      letter-spacing: .18em;
+      color: var(--violet);
+      margin-bottom: 2.5rem;
+    }
+
+    .countdown-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+      margin-bottom: 3rem;
+    }
+
+    .countdown-grid {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .countdown-item {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 1.5rem 1.8rem;
+      min-width: 110px;
+      backdrop-filter: blur(12px);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .countdown-item::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: linear-gradient(135deg, rgba(168, 85, 247, .06), rgba(255, 107, 157, .06));
+    }
+
+    .countdown-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 3rem;
+      font-weight: 700;
+      line-height: 1;
+      display: block;
+      background: linear-gradient(135deg, var(--gold), var(--rose));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .countdown-unit {
+      font-size: .7rem;
+      text-transform: uppercase;
+      letter-spacing: .15em;
+      color: var(--text-muted);
+      margin-top: .5rem;
+    }
+
+    /* ── PLAYER ── */
+    .player-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 2rem 2.5rem;
+      backdrop-filter: blur(20px);
+      position: relative;
+      overflow: hidden;
+      transition: border-color .4s var(--ease-smooth);
+    }
+
+    .player-card.is-playing {
+      border-color: rgba(255, 107, 157, .3);
+    }
+
+    .player-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: linear-gradient(135deg, rgba(168, 85, 247, .05), rgba(255, 107, 157, .05));
+    }
+
+    .player-layout {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    /* Art */
+    .player-art {
+      width: 80px;
+      height: 80px;
+      border-radius: var(--radius-sm);
+      flex-shrink: 0;
+      background: linear-gradient(135deg, var(--violet-dark), var(--rose-dark));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.2rem;
+      position: relative;
+      box-shadow: 0 8px 30px rgba(168, 85, 247, .3);
+      animation: rotateSlow 10s linear infinite paused;
+    }
+
+    .player-art.is-playing {
+      animation-play-state: running;
+    }
+
+    .player-art-overlay {
+      position: absolute;
+      inset: 0;
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0, 0, 0, .55);
+      opacity: 0;
+      transition: opacity .25s ease;
+    }
+
+    .player-art.is-buffering .player-art-overlay {
+      opacity: 1;
+    }
+
+    /* Info */
+    .player-info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .player-song {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .player-artist {
+      font-size: .85rem;
+      color: var(--text-muted);
+      margin-top: .3rem;
+    }
+
+    .player-message {
+      font-size: .78rem;
+      color: var(--rose);
+      margin-top: .5rem;
+      font-style: italic;
+    }
+
+    /* Controls */
+    .player-controls {
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+    }
+
+    .play-btn {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      border: none;
+      flex-shrink: 0;
+      background: linear-gradient(135deg, var(--rose), var(--violet));
+      color: #fff;
+      font-size: 1.3rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform .2s ease, box-shadow .2s ease, opacity .2s ease;
+      box-shadow: 0 4px 20px rgba(255, 107, 157, .4);
+      position: relative;
+      z-index: 1;
+    }
+
+    .play-btn:hover:not(:disabled) {
+      transform: scale(1.08);
+      box-shadow: 0 8px 30px rgba(255, 107, 157, .6);
+    }
+
+    .play-btn:active:not(:disabled) {
+      transform: scale(.96);
+    }
+
+    .play-btn:disabled {
+      opacity: .55;
+      cursor: not-allowed;
+    }
+
+    .play-btn .btn-icon {
+      transition: opacity .15s ease;
+    }
+
+    .play-btn .btn-spin {
+      position: absolute;
+      width: 22px;
+      height: 22px;
+      border: 2.5px solid rgba(255, 255, 255, .25);
+      border-top-color: #fff;
+      border-radius: 50%;
+      animation: spin .75s linear infinite;
+      display: none;
+    }
+
+    .play-btn.is-loading .btn-icon {
+      opacity: 0;
+    }
+
+    .play-btn.is-loading .btn-spin {
+      display: block;
+    }
+
+    .vol-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--text-muted);
+      font-size: 1rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all .15s ease;
+    }
+
+    .vol-btn:hover {
+      color: #fff;
+      border-color: rgba(255, 255, 255, .25);
+      background: rgba(255, 255, 255, .06);
+    }
+
+    .vol-btn.is-muted {
+      color: rgba(255, 107, 157, .7);
+    }
+
+    /* Progress bottom */
+    .player-bottom {
+      flex-basis: 100%;
+      margin-top: 1.25rem;
+    }
+
+    .player-time-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: .45rem;
+    }
+
+    .player-time {
+      font-size: .74rem;
+      color: var(--text-dim);
+      font-variant-numeric: tabular-nums;
+      letter-spacing: .04em;
+      transition: color .3s ease;
+    }
+
+    .player-time.live {
+      color: var(--text-muted);
+    }
+
+    .player-status {
+      font-size: .72rem;
+      color: var(--text-dim);
+      font-style: italic;
+      transition: color .3s ease;
+    }
+
+    .player-status.active {
+      color: var(--rose);
+    }
+
+    /* Progress track */
+    .player-track-wrap {
+      position: relative;
+      padding: 6px 0;
+      margin: -6px 0;
+      cursor: pointer;
+    }
+
+    .player-track-wrap.locked {
+      cursor: default;
+      pointer-events: none;
+    }
+
+    .player-track {
+      height: 4px;
+      border-radius: var(--radius-full);
+      background: rgba(255, 255, 255, .08);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .player-buffered {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      background: rgba(255, 255, 255, .1);
+      border-radius: var(--radius-full);
+      transition: width .5s ease;
+    }
+
+    .player-fill {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(to right, var(--rose), var(--violet));
+      border-radius: var(--radius-full);
+      transition: width .5s linear;
+    }
+
+    /* Shimmer — visible while loading */
+    .player-shimmer {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, .18) 50%, transparent 100%);
+      background-size: 200% 100%;
+      animation: shimmer 1.6s ease-in-out infinite;
+      border-radius: var(--radius-full);
+      transition: opacity .4s ease;
+    }
+
+    .player-shimmer.off {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    /* Thumb dot */
+    .player-thumb {
+      position: absolute;
+      right: -5px;
+      top: 50%;
+      transform: translateY(-50%) scale(0);
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #fff;
+      box-shadow: 0 0 0 3px rgba(255, 107, 157, .4);
+      transition: transform .15s ease;
+    }
+
+    .player-track-wrap:hover .player-thumb {
+      transform: translateY(-50%) scale(1);
+    }
+
+    /* Spinner helper */
+    .spinner {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      border: 2.5px solid rgba(255, 255, 255, .25);
+      border-top-color: #fff;
+      animation: spin .75s linear infinite;
+    }
+
+    /* ── SHARE ── */
+    .share-section {
+      text-align: center;
+      padding: 4rem 1.5rem 6rem;
+    }
+
+    .share-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+      margin-bottom: 1rem;
+    }
+
+    .share-desc {
+      color: var(--text-muted);
+      max-width: 400px;
+      margin: 0 auto 2rem;
+      line-height: 1.7;
+      font-size: .95rem;
+    }
+
+    .share-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      padding: .85rem 1.8rem;
+      border-radius: var(--radius-full);
+      border: none;
+      font-size: .9rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all .25s ease;
+      text-decoration: none;
+      font-family: inherit;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--rose), var(--violet));
+      color: #fff;
+      box-shadow: 0 4px 20px rgba(168, 85, 247, .35);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(168, 85, 247, .5);
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 1px solid rgba(255, 255, 255, .2);
+      color: #fff;
+    }
+
+    .btn-outline:hover {
+      background: rgba(255, 255, 255, .06);
+      border-color: rgba(255, 255, 255, .35);
+      transform: translateY(-2px);
+    }
+
+    /* ── WATERMARK ── */
+    .watermark {
+      position: fixed;
+      bottom: 1.2rem;
+      right: 1.2rem;
+      z-index: 100;
+      background: rgba(10, 6, 18, .85);
+      border: 1px solid rgba(245, 200, 66, .25);
+      border-radius: var(--radius-full);
+      padding: .4rem 1rem;
+      font-size: .72rem;
+      color: var(--gold-light);
+      display: flex;
+      align-items: center;
+      gap: .4rem;
+      backdrop-filter: blur(10px);
+      letter-spacing: .04em;
+      font-weight: 500;
+    }
+
+    .watermark strong {
+      color: var(--gold);
+    }
+
+    /* ── BALLOONS ── */
+    .balloons-container {
+      position: fixed;
+      bottom: -100px;
+      left: 0;
+      width: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .balloon {
+      position: absolute;
+      bottom: 0;
+      border-radius: 50% 50% 45% 45%;
+      animation: floatUp linear infinite;
+    }
+
+    .balloon::after {
+      content: '';
+      position: absolute;
+      bottom: -14px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 1px;
+      height: 14px;
+      background: rgba(255, 255, 255, .3);
+    }
+
+    /* ── TOAST ── */
+    .toast {
+      position: fixed;
+      bottom: 4rem;
+      left: 50%;
+      pointer-events: none;
+      z-index: 999;
+      transform: translateX(-50%) translateY(100px);
+      background: rgba(168, 85, 247, .95);
+      color: #fff;
+      padding: .8rem 1.8rem;
+      border-radius: var(--radius-full);
+      font-size: .88rem;
+      font-weight: 500;
+      backdrop-filter: blur(10px);
+      white-space: nowrap;
+      transition: transform .4s var(--ease-spring);
+    }
+
+    .toast.show {
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* ── REVEAL ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── KEYFRAMES ── */
+    @keyframes fadeDown {
+      from {
+        opacity: 0;
+        transform: translateY(-20px)
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0)
+      }
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0
+      }
+
+      to {
+        opacity: 1
+      }
+    }
+
+    @keyframes popIn {
+      from {
+        opacity: 0;
+        transform: scale(.5)
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1)
+      }
+    }
+
+    @keyframes bounce {
+
+      0%,
+      100% {
+        transform: rotate(45deg) translateY(0)
+      }
+
+      50% {
+        transform: rotate(45deg) translateY(6px)
+      }
+    }
+
+    @keyframes rotateSlow {
+      from {
+        transform: rotate(0deg)
+      }
+
+      to {
+        transform: rotate(360deg)
+      }
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(0) rotate(-5deg);
+        opacity: .7
+      }
+
+      50% {
+        transform: translateY(-50vh) rotate(5deg);
+        opacity: .65
+      }
+
+      100% {
+        transform: translateY(-100vh) rotate(-3deg);
+        opacity: 0
+      }
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg)
+      }
+    }
+
+    @keyframes shimmer {
+      0% {
+        background-position: -200% 0
+      }
+
+      100% {
+        background-position: 200% 0
+      }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media(max-width:640px) {
+      .gallery-grid {
+        grid-template-columns: repeat(2, 1fr)
+      }
+
+      .gallery-item:first-child {
+        grid-column: span 2
+      }
+
+      .message-card {
+        padding: 2rem 1.5rem
+      }
+
+      .player-card {
+        padding: 1.5rem
+      }
+
+      .countdown-item {
+        min-width: 80px;
+        padding: 1.2rem 1rem
+      }
+
+      .countdown-num {
+        font-size: 2.2rem
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <canvas id="particles-canvas" aria-hidden="true"></canvas>
+  <canvas id="confetti-canvas" aria-hidden="true"></canvas>
+  <div class="balloons-container" id="balloons" aria-hidden="true"></div>
+  <div class="watermark" aria-hidden="true">✨ Creado en <strong>the auratechnology</strong></div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <div class="content">
+
+    <!-- HERO -->
+    <section class="hero" id="hero">
+      <div class="badge"><span>🎂</span> Hoy es un día especial</div>
+      <p class="hero-eyebrow">Con todo el amor del mundo...</p>
+      <h1 class="hero-title">Feliz<br>Cumpleaños</h1>
+      <p class="hero-name">Sofía ✨</p>
+      <p class="hero-subtitle">Hoy el universo entero se detuvo un segundo para celebrarte. Porque tú haces que todo
+        brille más.</p>
+      <div class="age-ring" id="age-ring" role="button" tabindex="0" aria-label="¡Haz clic para celebrar!">
+        <span class="age-number">25</span>
+        <span class="age-label">años</span>
+      </div>
+      <div class="scroll-cta" aria-hidden="true">
+        <span>Sigue descubriendo</span>
+        <div class="scroll-arrow"></div>
+      </div>
+    </section>
+
+    <div class="divider" role="separator"></div>
+
+    <!-- MENSAJE -->
+    <section aria-label="Mensaje especial">
+      <div class="section-inner">
+        <div class="message-card reveal" id="msg-card">
+          <div class="message-label">💌 Mensaje especial</div>
+          <p class="message-text">
+            Hay personas que llegan a tu vida y la transforman para siempre.
+            Tú eres una de esas personas para mí. Tu sonrisa tiene el poder de
+            convertir cualquier día gris en algo mágico. Hoy, en tu día, quiero
+            que sepas que estoy profundamente agradecida de que existas.
+            Que estos 25 años hayan sido solo el comienzo de todo lo increíble
+            que te espera. ¡Feliz cumpleaños, vida mía!
+          </p>
+          <p class="message-from">— Con todo mi cariño, María 🌹</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider" role="separator"></div>
+
+    <!-- GALERÍA -->
+    <section aria-label="Galería de recuerdos">
+      <div class="section-inner">
+        <h2 class="section-title reveal">Nuestros momentos 📸</h2>
+        <p class="section-sub reveal">Los recuerdos más bonitos juntas</p>
+        <div class="gallery-grid reveal">
+          <div class="gallery-item">
+            <div class="gallery-placeholder">🌅<span>Foto principal</span></div>
+          </div>
+          <div class="gallery-item">
+            <div class="gallery-placeholder">🌸</div>
+          </div>
+          <div class="gallery-item">
+            <div class="gallery-placeholder">🎉</div>
+          </div>
+          <div class="gallery-item">
+            <div class="gallery-placeholder">😊</div>
+          </div>
+          <div class="gallery-item">
+            <div class="gallery-placeholder">🌟</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider" role="separator"></div>
+
+    <!-- COUNTDOWN -->
+    <section class="countdown-section" aria-label="Cuenta regresiva">
+      <div class="section-inner">
+        <p class="countdown-label reveal">⏳ Próximo aniversario</p>
+        <h2 class="countdown-title reveal">Faltan para tu próximo cumpleaños...</h2>
+        <div class="countdown-grid" id="countdown">
+          <div class="countdown-item reveal"><span class="countdown-num" id="cd-days">---</span>
+            <div class="countdown-unit">Días</div>
+          </div>
+          <div class="countdown-item reveal"><span class="countdown-num" id="cd-hours">--</span>
+            <div class="countdown-unit">Horas</div>
+          </div>
+          <div class="countdown-item reveal"><span class="countdown-num" id="cd-mins">--</span>
+            <div class="countdown-unit">Minutos</div>
+          </div>
+          <div class="countdown-item reveal"><span class="countdown-num" id="cd-secs">--</span>
+            <div class="countdown-unit">Segundos</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider" role="separator"></div>
+
+    <!-- PLAYER -->
+    <section aria-label="Canción dedicada">
+      <div class="section-inner">
+        <h2 class="section-title reveal">🎵 Una canción para ti</h2>
+        <p class="section-sub reveal">Porque hay melodías que dicen lo que las palabras no pueden</p>
+
+        <div class="player-card reveal" id="player-card" role="region" aria-label="Reproductor de música">
+          <div class="player-layout">
+
+            <!-- Album art -->
+            <div class="player-art" id="player-art" aria-hidden="true">
+              🎶
+              <div class="player-art-overlay">
+                <div class="spinner"></div>
+              </div>
+            </div>
+
+            <!-- Info -->
+            <div class="player-info">
+              <div class="player-song">Perfect — Ed Sheeran</div>
+              <div class="player-artist">Dedicada especialmente para Sofía</div>
+              <div class="player-message">"Esta canción me recuerda a ti cada vez que la escucho 💕"</div>
+            </div>
+
+            <!-- Controls -->
+            <div class="player-controls">
+              <button class="play-btn is-loading" id="play-btn" aria-label="Reproducir" disabled>
+                <span class="btn-icon">▶</span>
+                <span class="btn-spin" aria-hidden="true"></span>
+              </button>
+              <button class="vol-btn" id="vol-btn" aria-label="Silenciar" title="Silenciar / activar sonido">🔊</button>
+            </div>
+
+          </div>
+
+          <!-- Progress + time -->
+          <div class="player-bottom">
+            <div class="player-time-row">
+              <span class="player-time" id="player-current">0:00</span>
+              <span class="player-status" id="player-status">Cargando canción...</span>
+              <span class="player-time" id="player-duration">–:––</span>
+            </div>
+            <div class="player-track-wrap locked" id="player-track-wrap" role="progressbar" aria-valuemin="0"
+              aria-valuemax="100" aria-valuenow="0" aria-label="Progreso de reproducción">
+              <div class="player-track">
+                <div class="player-buffered" id="player-buffered"></div>
+                <div class="player-fill" id="player-fill">
+                  <div class="player-thumb"></div>
+                </div>
+                <div class="player-shimmer" id="player-shimmer"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SHARE -->
+    <section class="share-section" aria-label="Compartir">
+      <div class="section-inner">
+        <h2 class="share-title reveal">Comparte esta celebración 🎊</h2>
+        <p class="share-desc reveal">Haz que ella sepa cuánto la quieres. Comparte esta página con un solo toque.</p>
+        <div class="share-buttons reveal">
+          <button class="btn btn-primary" id="btn-copy">🔗 Copiar enlace</button>
+          <button class="btn btn-outline" id="btn-wa">💬 Compartir por WhatsApp</button>
+        </div>
+      </div>
+    </section>
+
+  </div><!-- /.content -->
+
+  <!-- Hidden YouTube mount -->
+  <div id="yt-player"
+    style="position:fixed;bottom:-9999px;left:-9999px;width:1px;height:1px;opacity:0;pointer-events:none;"
+    aria-hidden="true"></div>
+
+  <script>
+    'use strict';
+
+    /* ───────────────────────────────────────────────────────
+       PARTICLES
+    ─────────────────────────────────────────────────────── */
+    const Particles = (() => {
+      const canvas = document.getElementById('particles-canvas');
+      const ctx = canvas.getContext('2d');
+      let W, H;
+      const COLORS = ['rgba(245,200,66,', 'rgba(255,107,157,', 'rgba(168,85,247,', 'rgba(255,255,255,'];
+      const pts = Array.from({ length: 80 }, () => ({
+        x: Math.random() * innerWidth, y: Math.random() * innerHeight,
+        r: Math.random() * 2.5 + .5, dx: (Math.random() - .5) * .3, dy: (Math.random() - .5) * .3,
+        color: COLORS[Math.floor(Math.random() * COLORS.length)],
+        alpha: Math.random() * .5 + .15, pulse: Math.random() * Math.PI * 2,
+      }));
+      const resize = () => { W = canvas.width = innerWidth; H = canvas.height = innerHeight; };
+      const draw = () => {
+        ctx.clearRect(0, 0, W, H);
+        for (const p of pts) {
+          p.pulse += .01;
+          const a = Math.max(0, Math.min(1, p.alpha + Math.sin(p.pulse) * .12));
+          ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+          ctx.fillStyle = p.color + a + ')'; ctx.fill();
+          p.x = (p.x + p.dx + W) % W;
+          p.y = (p.y + p.dy + H) % H;
+        }
+        requestAnimationFrame(draw);
+      };
+      resize(); window.addEventListener('resize', resize, { passive: true }); draw();
+    })();
+
+    /* ───────────────────────────────────────────────────────
+       CONFETTI
+    ─────────────────────────────────────────────────────── */
+    const Confetti = (() => {
+      const canvas = document.getElementById('confetti-canvas');
+      const ctx = canvas.getContext('2d');
+      let W, H, pieces = [], rafId = null;
+      const COLORS = ['#f5c842', '#ff6b9d', '#a855f7', '#34d399', '#60a5fa', '#fb923c', '#fff'];
+      const resize = () => { W = canvas.width = innerWidth; H = canvas.height = innerHeight; };
+
+      const burst = () => {
+        for (let i = 0; i < 140; i++) {
+          pieces.push({
+            x: Math.random() * W, y: -10,
+            w: Math.random() * 10 + 4, h: Math.random() * 5 + 3,
+            color: COLORS[Math.floor(Math.random() * COLORS.length)],
+            vx: (Math.random() - .5) * 4, vy: Math.random() * 3 + 1.5,
+            angle: Math.random() * Math.PI * 2, spin: (Math.random() - .5) * .15,
+            alpha: 1, decay: Math.random() * .004 + .003,
+          });
+        }
+        if (!rafId) animate();
+      };
+
+      const animate = () => {
+        ctx.clearRect(0, 0, W, H);
+        pieces = pieces.filter(p => p.alpha > .02);
+        for (const p of pieces) {
+          p.x += p.vx; p.y += p.vy; p.vy += .05;
+          p.angle += p.spin; p.alpha -= p.decay;
+          ctx.save(); ctx.globalAlpha = Math.max(0, p.alpha);
+          ctx.translate(p.x, p.y); ctx.rotate(p.angle);
+          ctx.fillStyle = p.color; ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+          ctx.restore();
+        }
+        rafId = pieces.length ? requestAnimationFrame(animate) : null;
+        if (!rafId) ctx.clearRect(0, 0, W, H);
+      };
+
+      resize(); window.addEventListener('resize', resize, { passive: true });
+      setTimeout(burst, 1000); setTimeout(burst, 5000);
+      return { burst };
+    })();
+
+    /* ───────────────────────────────────────────────────────
+       BALLOONS
+    ─────────────────────────────────────────────────────── */
+    (() => {
+      const container = document.getElementById('balloons');
+      const COLORS = ['#ff6b9d', '#f5c842', '#a855f7', '#60a5fa', '#34d399', '#fb923c'];
+      for (let i = 0; i < 12; i++) {
+        const b = document.createElement('div');
+        b.className = 'balloon';
+        Object.assign(b.style, {
+          left: `${Math.random() * 100}%`,
+          background: COLORS[i % COLORS.length],
+          boxShadow: 'inset -6px -8px 0 rgba(0,0,0,.12)',
+          animationDuration: `${Math.random() * 8 + 10}s`,
+          animationDelay: `${Math.random() * 6}s`,
+          width: `${Math.random() * 20 + 30}px`,
+          opacity: `${Math.random() * .3 + .4}`,
+        });
+        container.appendChild(b);
+      }
+    })();
+
+    /* ───────────────────────────────────────────────────────
+       REVEAL ON SCROLL
+    ─────────────────────────────────────────────────────── */
+    (() => {
+      const io = new IntersectionObserver(entries => {
+        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+      }, { threshold: .12 });
+      document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+    })();
+
+    /* ───────────────────────────────────────────────────────
+       COUNTDOWN
+    ─────────────────────────────────────────────────────── */
+    (() => {
+      const $ = id => document.getElementById(id);
+      const pad = (n, l = 2) => String(n).padStart(l, '0');
+      const tick = () => {
+        const now = Date.now(), yr = new Date().getFullYear();
+        let next = new Date(yr, 3, 1).getTime();
+        if (next <= now) next = new Date(yr + 1, 3, 1).getTime();
+        const d = next - now;
+        $('cd-days').textContent = pad(Math.floor(d / 86400000), 3);
+        $('cd-hours').textContent = pad(Math.floor((d % 86400000) / 3600000));
+        $('cd-mins').textContent = pad(Math.floor((d % 3600000) / 60000));
+        $('cd-secs').textContent = pad(Math.floor((d % 60000) / 1000));
+      };
+      tick(); setInterval(tick, 1000);
+    })();
+
+    /* ───────────────────────────────────────────────────────
+       TOAST
+    ─────────────────────────────────────────────────────── */
+    const Toast = (() => {
+      const el = document.getElementById('toast');
+      let t;
+      return {
+        show(msg, ms = 3000) {
+          clearTimeout(t); el.textContent = msg;
+          el.classList.add('show');
+          t = setTimeout(() => el.classList.remove('show'), ms);
+        }
+      };
+    })();
+
+    /* ───────────────────────────────────────────────────────
+       PLAYER  —  YouTube IFrame API
+    ─────────────────────────────────────────────────────── */
+    const Player = (() => {
+      /* DOM refs */
+      const playBtn = document.getElementById('play-btn');
+      const volBtn = document.getElementById('vol-btn');
+      const artEl = document.getElementById('player-art');
+      const cardEl = document.getElementById('player-card');
+      const fillEl = document.getElementById('player-fill');
+      const buffEl = document.getElementById('player-buffered');
+      const shimmerEl = document.getElementById('player-shimmer');
+      const trackWrap = document.getElementById('player-track-wrap');
+      const curEl = document.getElementById('player-current');
+      const durEl = document.getElementById('player-duration');
+      const statusEl = document.getElementById('player-status');
+
+      let yt = null;   // YT.Player instance
+      let ready = false;
+      let playing = false;
+      let muted = false;
+      let rafId = null;
+      let duration = 0;
+
+      /* ── Helpers ── */
+      const fmt = s => {
+        if (!s || isNaN(s)) return '–:––';
+        const m = Math.floor(s / 60), ss = Math.floor(s % 60);
+        return `${m}:${String(ss).padStart(2, '0')}`;
+      };
+
+      const setStatus = (txt, active = false) => {
+        statusEl.textContent = txt;
+        statusEl.classList.toggle('active', active);
+      };
+
+      const setShimmer = show => shimmerEl.classList.toggle('off', !show);
+
+      /* ── Called by YouTube IFrame API globally ── */
+      window.onYouTubeIframeAPIReady = () => {
+        yt = new YT.Player('yt-player', {
+          videoId: '2Vv-BfVoq4g',    // Perfect — Ed Sheeran (official audio)
+          playerVars: {
+            autoplay: 0, controls: 0, disablekb: 1,
+            fs: 0, iv_load_policy: 3, modestbranding: 1, rel: 0,
+          },
+          events: {
+            onReady(e) {
+              ready = true;
+              duration = yt.getDuration() || 0;
+              durEl.textContent = fmt(duration);
+              durEl.classList.add('live');
+
+              // Unlock UI
+              playBtn.disabled = false;
+              playBtn.classList.remove('is-loading');
+              trackWrap.classList.remove('locked');
+              setShimmer(false);
+              setStatus('Lista para reproducir ✨', false);
+            },
+            onStateChange(e) {
+              const S = YT.PlayerState;
+              if (e.data === S.BUFFERING) {
+                artEl.classList.add('is-buffering');
+                setStatus('Cargando...', false);
+              }
+              if (e.data === S.PLAYING) {
+                artEl.classList.remove('is-buffering');
+                playing = true;
+                playBtn.innerHTML = '<span class="btn-icon">⏸</span>';
+                artEl.classList.add('is-playing');
+                cardEl.classList.add('is-playing');
+                duration = yt.getDuration() || duration;
+                durEl.textContent = fmt(duration);
+                setStatus('Reproduciendo 🎵', true);
+                startRAF();
+              }
+              if (e.data === S.PAUSED) {
+                artEl.classList.remove('is-buffering');
+                playing = false;
+                playBtn.innerHTML = '<span class="btn-icon">▶</span>';
+                artEl.classList.remove('is-playing');
+                cardEl.classList.remove('is-playing');
+                setStatus('En pausa', false);
+                stopRAF();
+              }
+              if (e.data === S.ENDED) {
+                playing = false;
+                playBtn.innerHTML = '<span class="btn-icon">▶</span>';
+                artEl.classList.remove('is-playing');
+                cardEl.classList.remove('is-playing');
+                fillEl.style.width = '0%';
+                buffEl.style.width = '0%';
+                curEl.textContent = '0:00';
+                trackWrap.setAttribute('aria-valuenow', '0');
+                setStatus('Fin de la canción', false);
+                stopRAF();
+              }
+            },
+            onError() {
+              setShimmer(false);
+              playBtn.disabled = false;
+              playBtn.classList.remove('is-loading');
+              setStatus('No disponible en esta región 😔', false);
+            },
+          },
+        });
+      };
+
+      /* ── RAF loop for progress ── */
+      const tick = () => {
+        if (!yt || !ready) return;
+        const current = yt.getCurrentTime() || 0;
+        const pct = duration > 0 ? (current / duration) * 100 : 0;
+        fillEl.style.width = pct + '%';
+        curEl.textContent = fmt(current);
+        trackWrap.setAttribute('aria-valuenow', Math.floor(pct));
+
+        // Buffered range
+        try {
+          const ranges = yt.getVideoLoadedFraction() * 100;
+          buffEl.style.width = ranges + '%';
+        } catch (_) { }
+        rafId = requestAnimationFrame(tick);
+      };
+      const startRAF = () => { stopRAF(); rafId = requestAnimationFrame(tick); };
+      const stopRAF = () => { if (rafId) { cancelAnimationFrame(rafId); rafId = null; } };
+
+      /* ── Seek on click ── */
+      trackWrap.addEventListener('click', e => {
+        if (!ready || !duration) return;
+        const rect = trackWrap.getBoundingClientRect();
+        const pct = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+        yt.seekTo(pct * duration, true);
+      });
+
+      /* ── Play/Pause toggle ── */
+      const toggle = () => {
+        if (!ready) return;
+        playing ? yt.pauseVideo() : yt.playVideo();
+        if (!playing) Confetti.burst();
+      };
+      playBtn.addEventListener('click', toggle);
+
+      /* ── Volume toggle ── */
+      volBtn.addEventListener('click', () => {
+        if (!ready) return;
+        muted = !muted;
+        muted ? yt.mute() : yt.unMute();
+        volBtn.textContent = muted ? '🔇' : '🔊';
+        volBtn.classList.toggle('is-muted', muted);
+      });
+
+      /* ── Keyboard shortcut: Space ── */
+      document.addEventListener('keydown', e => {
+        if (e.code === 'Space' && document.activeElement.tagName !== 'BUTTON' && document.activeElement.tagName !== 'INPUT') {
+          e.preventDefault(); toggle();
+        }
+      });
+
+      /* ── Load YouTube IFrame API ── */
+      const tag = document.createElement('script');
+      tag.src = 'https://www.youtube.com/iframe_api';
+      document.head.appendChild(tag);
+
+    })();
+
+    /* ───────────────────────────────────────────────────────
+       SHARE
+    ─────────────────────────────────────────────────────── */
+    (() => {
+      document.getElementById('btn-copy').addEventListener('click', () => {
+        navigator.clipboard.writeText(location.href)
+          .then(() => Toast.show('¡Enlace copiado! 🎉'))
+          .catch(() => Toast.show('Copia: ' + location.href, 5000));
+      });
+      document.getElementById('btn-wa').addEventListener('click', () => {
+        const msg = encodeURIComponent('🎂 ¡Mira esta página que creé para tu cumpleaños! → ' + location.href);
+        window.open('https://wa.me/?text=' + msg, '_blank', 'noopener,noreferrer');
+      });
+    })();
+
+    /* ───────────────────────────────────────────────────────
+       AGE RING — confetti + keyboard
+    ─────────────────────────────────────────────────────── */
+    (() => {
+      const ring = document.getElementById('age-ring');
+      const fire = () => Confetti.burst();
+      ring.addEventListener('click', fire);
+      ring.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); fire(); } });
+    })();
+  </script>
+
+</body>
+
+</html>
