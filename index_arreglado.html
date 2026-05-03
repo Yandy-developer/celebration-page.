@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Para ti, Mamá</title>
+  
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Quicksand:wght@400;600&display=swap');
+
+    :root {
+      --bg-color: #fdf2f4;
+      --card-bg: rgba(255, 255, 255, 0.85);
+      --text-color: #5d4037;
+      --accent-color: #d81b60;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Quicksand', sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow-x: hidden;
+      background-image: 
+        radial-gradient(circle at 15% 50%, rgba(255, 192, 203, 0.3) 0%, transparent 50%),
+        radial-gradient(circle at 85% 30%, rgba(255, 182, 193, 0.4) 0%, transparent 50%);
+    }
+
+    .app-container {
+      width: 100%;
+      max-width: 600px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .card {
+      background: var(--card-bg);
+      backdrop-filter: blur(10px);
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+      text-align: center;
+      width: 100%;
+      border: 1px solid rgba(255,255,255,0.6);
+      box-sizing: border-box;
+    }
+
+    h1 {
+      font-family: 'Dancing Script', cursive;
+      font-size: 3rem;
+      color: var(--accent-color);
+      margin-top: 0;
+    }
+
+    h2 {
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+    }
+
+    p {
+      font-size: 1.1rem;
+      line-height: 1.6;
+    }
+
+    input {
+      width: 100%;
+      padding: 15px;
+      margin: 20px 0;
+      border: 2px solid #f8bbd0;
+      border-radius: 10px;
+      font-size: 1.1rem;
+      font-family: 'Quicksand', sans-serif;
+      outline: none;
+      transition: border-color 0.3s;
+      box-sizing: border-box;
+    }
+
+    input:focus {
+      border-color: var(--accent-color);
+    }
+
+    .error-msg {
+      color: #d32f2f;
+      font-weight: 600;
+      margin-bottom: 15px;
+    }
+
+    .btn {
+      background: var(--accent-color);
+      color: white;
+      border: none;
+      padding: 12px 30px;
+      border-radius: 25px;
+      font-size: 1.1rem;
+      cursor: pointer;
+      font-family: 'Quicksand', sans-serif;
+      font-weight: 600;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 4px 15px rgba(216, 27, 96, 0.3);
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(216, 27, 96, 0.4);
+    }
+
+    .btn-alt {
+      background: white;
+      color: var(--accent-color);
+      border: 2px solid var(--accent-color);
+      padding: 12px 30px;
+      border-radius: 25px;
+      font-size: 1.1rem;
+      cursor: pointer;
+      font-family: 'Quicksand', sans-serif;
+      font-weight: 600;
+      margin-bottom: 15px;
+      transition: background 0.3s;
+    }
+
+    .btn-alt:hover {
+      background: #fdf2f4;
+    }
+
+    .btn-group {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .fade-in { animation: fadeIn 0.6s ease-in; }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .shake { animation: shake 0.5s; }
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      20%, 60% { transform: translateX(-10px); }
+      40%, 80% { transform: translateX(10px); }
+    }
+
+    .envelope-container {
+      cursor: pointer;
+      padding: 80px 20px;
+      background: none;
+      border: none;
+      box-shadow: none;
+    }
+
+    .envelope {
+      width: 250px;
+      height: 160px;
+      background: #e91e63;
+      position: relative;
+      margin: 0 auto;
+      border-radius: 5px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+      transition: transform 0.3s;
+    }
+
+    .envelope:hover { transform: scale(1.05); }
+
+    .flap {
+      position: absolute; top: 0; left: 0; width: 0; height: 0; 
+      border-left: 125px solid transparent;
+      border-right: 125px solid transparent;
+      border-top: 80px solid #d81b60; z-index: 2;
+    }
+
+    .envelope::after {
+      content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 0; 
+      border-left: 125px solid transparent;
+      border-right: 125px solid transparent;
+      border-bottom: 80px solid #f06292; z-index: 1;
+    }
+
+    .touch-text {
+      position: absolute; bottom: -60px; width: 100%; font-weight: 600;
+      color: var(--accent-color); text-align: center; font-size: 1.2rem;
+    }
+
+    .pulse { animation: pulse 2s infinite; }
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.03); }
+      100% { transform: scale(1); }
+    }
+
+    .slide-up { animation: slideUp 1s cubic-bezier(0.2, 0.8, 0.2, 1); }
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(100vh) scale(0.5); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .letter-container {
+      background: white; width: 100%; max-width: 700px;
+      padding: 50px 30px; border-radius: 10px;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.15); box-sizing: border-box;
+    }
+
+    .letter-content h1 { text-align: center; margin-bottom: 40px; font-size: 3.5rem; }
+
+    .poetry-section { display: flex; align-items: center; gap: 30px; margin-bottom: 40px; }
+    .poetry-section.reverse { flex-direction: row-reverse; }
+
+    .photo {
+      width: 220px; height: 220px; object-fit: cover; border-radius: 15px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1); transform: rotate(-3deg); border: 8px solid white;
+    }
+
+    .poetry-section.reverse .photo { transform: rotate(3deg); }
+
+    .verse { font-family: 'Dancing Script', cursive; font-size: 2rem; line-height: 1.4; color: #3e2723; flex: 1; }
+
+    .final-dedication {
+      text-align: center; font-family: 'Dancing Script', cursive; font-size: 2.5rem;
+      color: var(--accent-color); margin-top: 50px; border-top: 2px dashed #f8bbd0; padding-top: 30px;
+    }
+
+    @media (max-width: 650px) {
+      .poetry-section { flex-direction: column !important; text-align: center; }
+      .photo { width: 100%; height: 250px; transform: none !important; }
+      .verse { font-size: 1.6rem; }
+      h1 { font-size: 2.5rem; }
+    }
+  </style>
+
+  <!-- React & Babel via CDN -->
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+  
+  <div id="root"></div>
+
+  <script type="text/babel">
+    const { useState, useRef } = React;
+
+    function App() {
+      const [step, setStep] = useState(0)
+      const [inputVal, setInputVal] = useState('')
+      const [errorObj, setErrorObj] = useState(null)
+      const playerRef = useRef(null)
+
+      const handleStart = () => setStep(1)
+
+      const checkQ1 = () => {
+        if (inputVal.toLowerCase().trim() === 'mama' || inputVal.toLowerCase().trim() === 'mamá') {
+           setStep(2); setInputVal(''); setErrorObj(null);
+        } else {
+           setErrorObj({ error: true, msg: 'intentalo de nuevo, te quiero mamá' });
+        }
+      }
+
+      const checkQ2 = () => {
+        if (inputVal.toLowerCase().trim() === 'pizza') {
+           setStep(3); setInputVal(''); setErrorObj(null);
+        } else {
+           setErrorObj({ error: true, msg: 'doble queso por favor...' });
+        }
+      }
+
+      const checkQ3 = () => { setStep(4); setErrorObj(null); }
+
+      const openLetter = () => {
+        setStep(5);
+        if(playerRef.current) {
+           playerRef.current.src = "https://www.youtube.com/embed/videoseries?listType=search&list=ricardo+arjona+mi+novia+se+me+esta+poniendo+vieja&autoplay=1&controls=0"
+        }
+      }
+
+      return (
+        <div className="app-container">
+          <iframe ref={playerRef} width="1" height="1" style={{opacity:0, position:'absolute', pointerEvents:'none'}} allow="autoplay" />
+
+          {step === 0 && (
+            <div className="card fade-in">
+              <h1>Un Regalo Especial</h1>
+              <p>Tengo algo para ti, pero primero, debes responder 3 preguntas secretas para abrir tu sorpresa.</p>
+              <button onClick={handleStart} className="btn">Empezar</button>
+            </div>
+          )}
+
+          {step === 1 && (
+            <div className={`card fade-in ${errorObj?.error ? 'shake' : ''}`}>
+              <h2>Pregunta 1</h2>
+              <p>¿Cuál fue la primera palabra que dije al nacer?</p>
+              <input 
+                type="text" value={inputVal} onChange={e => setInputVal(e.target.value)} 
+                placeholder="Escribe tu respuesta..." onKeyDown={e => e.key === 'Enter' && checkQ1()}
+              />
+              {errorObj && <p className="error-msg">{errorObj.msg}</p>}
+              <button onClick={checkQ1} className="btn">Siguiente</button>
+            </div>
+          )}
+
+          {step === 2 && (
+            <div className={`card fade-in ${errorObj?.error ? 'shake' : ''}`}>
+              <h2>Pregunta 2</h2>
+              <p>¿Cuál es mi comida favorita?</p>
+              <input 
+                type="text" value={inputVal} onChange={e => setInputVal(e.target.value)} 
+                placeholder="Escribe tu respuesta..." onKeyDown={e => e.key === 'Enter' && checkQ2()}
+              />
+              {errorObj && <p className="error-msg">{errorObj.msg}</p>}
+              <button onClick={checkQ2} className="btn">Siguiente</button>
+            </div>
+          )}
+
+          {step === 3 && (
+            <div className="card fade-in">
+              <h2>Pregunta 3</h2>
+              <p>¿A cuál hijo amas más?</p>
+              <div className="btn-group">
+                <button onClick={checkQ3} className="btn-alt">A ti</button>
+                <button onClick={checkQ3} className="btn-alt">A tu hermano/a</button>
+                <button onClick={checkQ3} className="btn">Los quiero por igual</button>
+              </div>
+            </div>
+          )}
+
+          {step === 4 && (
+            <div className="card envelope-container fade-in" onClick={openLetter}>
+              <div className="envelope">
+                <div className="flap pulse"></div>
+                <p className="touch-text">Toca para abrir tu carta</p>
+              </div>
+            </div>
+          )}
+
+          {step === 5 && (
+            <div className="letter-container slide-up">
+              <div className="letter-content">
+                <h1>Para ti, Mamá</h1>
+                <div className="poetry-section">
+                  <img src="https://images.unsplash.com/photo-1555252333-9f8e92e65df9?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Mamá y bebé" className="photo" />
+                  <p className="verse">Esa primera palabra que te dije al nacer,<br/> no fue al azar, fue la promesa de este amor. <br/>"Mamá", el pilar de mi ser.</p>
+                </div>
+                
+                <div className="poetry-section reverse">
+                  <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Pizza" className="photo" />
+                  <p className="verse">Y como nuestras risas compartiendo aquella pizza,<br/>con doble queso, como a ambos nos conquista, <br/>quiero decirte que cada momento contigo <br/>es mi victoria más bonita.</p>
+                </div>
+                
+                <p className="final-dedication">¡Feliz Día de la Madre!<br/>Te amo infinitamente.</p>
+              </div>
+            </div>
+          )}
+        </div>
+      );
+    }
+
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<App />);
+  </script>
+</body>
+</html>
