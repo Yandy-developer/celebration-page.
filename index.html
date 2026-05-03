@@ -1,14 +1,104 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/celebration-page/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>celebration-mother</title>
-    <script type="module" crossorigin src="/celebration-page/assets/index-ClkWLNzv.js"></script>
-    <link rel="stylesheet" crossorigin href="/celebration-page/assets/index-ByOjIoJk.css">
-  </head>
-  <body>
-    <div id="root"></div>
-  </body>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eternamente Mamá | Regalos Exclusivos</title>
+    <meta name="description" content="Celebra el Día de la Madre con las experiencias más exclusivas, lujo y amor. Regala momentos inolvidables.">
+    <link rel="stylesheet" href="style.css">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- Navegación -->
+    <header>
+        <a href="#" class="logo">Eternamente Mamá</a>
+        <ul class="nav-links">
+            <li><a href="#experiencias">Experiencias</a></li>
+            <li><a href="#testimonios">El Impacto</a></li>
+            <li><a href="#nosotros">Nosotros</a></li>
+        </ul>
+        <a href="#reservar" class="btn-primary">Sorpréndela Hoy</a>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Todo el amor que ella merece</h1>
+            <p>Porque su dedicación es infinita. Descubre nuestra colección de experiencias y regalos premium diseñados exclusivamente para celebrar a la mujer más importante de tu vida.</p>
+            <a href="#experiencias" class="btn-primary">Descubrir Colección</a>
+        </div>
+    </section>
+
+    <!-- Features / Regalos Section -->
+    <section id="experiencias" class="features">
+        <h2 class="section-title">Experiencias Inolvidables</h2>
+        <div class="grid">
+            <!-- Card 1 -->
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Día de Spa" class="card-img">
+                <div class="card-body">
+                    <h3 class="card-title">Retiro de Paz (Spa)</h3>
+                    <p class="card-text">Un día completo dedicado a su relajación. Masajes con piedras calientes, aromaterapia y circuitos de agua.</p>
+                    <a href="#" class="btn-primary">Ver Detalles</a>
+                </div>
+            </div>
+            <!-- Card 2 -->
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1515562141207-7a8efdbdceb1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Joyería Exclusiva" class="card-img">
+                <div class="card-body">
+                    <h3 class="card-title">Colección Oro Rosé</h3>
+                    <p class="card-text">Joyas finas seleccionadas, un símbolo eterno que captura la esencia de su belleza y tu gratitud.</p>
+                    <a href="#" class="btn-primary">Ver Detalles</a>
+                </div>
+            </div>
+            <!-- Card 3 -->
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Cena de Lujo" class="card-img">
+                <div class="card-body">
+                    <h3 class="card-title">Cena a la Luz de las Velas</h3>
+                    <p class="card-text">Una velada gastronómica de 5 tiempos en el restaurante más exclusivo de la ciudad, pensado para ella.</p>
+                    <a href="#" class="btn-primary">Ver Detalles</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonial Section -->
+    <section id="testimonios" class="testimonial">
+        <p class="quote">"El amor de una madre es el velo de luz suave que cobija el corazón para toda la vida."</p>
+        <p class="author">— Celebrando su legado</p>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">Eternamente Mamá</div>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-pinterest"></i></a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Eternamente Mamá. Todos los derechos reservados. Diseñado con amor para ellas.</p>
+        </div>
+    </footer>
+
+    <!-- Script simple para efectos (opcional) -->
+    <script>
+        // Efecto scroll en el Header
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.style.background = 'rgba(254, 250, 224, 0.95)';
+                header.style.boxShadow = '0 2px 10px rgba(0,0,0,0.1)';
+            } else {
+                header.style.background = 'rgba(254, 250, 224, 0.8)';
+                header.style.boxShadow = 'none';
+            }
+        });
+    </script>
+</body>
 </html>
